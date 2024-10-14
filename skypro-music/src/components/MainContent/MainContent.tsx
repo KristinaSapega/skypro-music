@@ -6,7 +6,11 @@ import { TrackType } from "@/types";
 import { useEffect, useState } from "react";
 import Filter from "../Filter/Filter";
 
-export const MainContent = () => {
+type props = {
+    setCurrentTrack: (track: TrackType) => void
+} 
+
+export const MainContent = ({setCurrentTrack}: props) => {
     const [tracks, setTracks] = useState<TrackType[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [openFilter, setOpenFilter] = useState<string | null>(null);
@@ -119,7 +123,7 @@ export const MainContent = () => {
                 </svg>
               </div>
             </div>
-            <TrackList tracks={tracks} />
+            <TrackList tracks={tracks} setCurrentTrack={setCurrentTrack} />
           </div>
         </div>
 

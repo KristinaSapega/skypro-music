@@ -4,7 +4,9 @@ import styles from "./TrackList.module.css"
 
 interface TrackListProps {
     tracks: TrackType[];
+    setCurrentTrack: (track: TrackType) => void
 }
+
 // const tracks = [
 //     { title: "Guilt", author: "Nero", album: "Welcome Reality", time: "4:44" },
 //     { title: "Elektro", author: "Dynoro, Outwork, Mr. Gee", album: "Elektro", time: "3:22" },
@@ -16,12 +18,14 @@ interface TrackListProps {
 //     { title: "Knives n Cherries", author: "minthazee", album: "Captivating", time: "1:48" },
 //   ];
   
-  export const TrackList: React.FC<TrackListProps> = ({tracks}) => {
+  export const TrackList: React.FC<TrackListProps> = ({tracks, setCurrentTrack}) => {
     return (
       <div className={styles.contentPlaylist}>
         {tracks.map((track, index) => (
           <div key={index} className={styles.playlistItem}>
-            <Track title={track.name} author={track.author} album={track.album} time={new Date(track.duration_in_seconds * 1000).toISOString().substr(14, 5)} />
+            <Track 
+            track={track}
+            setCurrentTrack={setCurrentTrack} />
           </div>
         ))}
       </div>
