@@ -5,30 +5,34 @@ import styles from "./MainContent.module.css";
 import { TrackType } from "@/types";
 import { useEffect, useState } from "react";
 import Filter from "../Filter/Filter";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { setTracks } from "@/store/features/trackSlice";
 
-type props = {
-    setCurrentTrack: (track: TrackType) => void
-} 
 
-export const MainContent = ({setCurrentTrack}: props) => {
-    const [tracks, setTracks] = useState<TrackType[]>([]);
+
+export const MainContent = () => {
+    // const [tracks, setTracks] = useState<TrackType[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [openFilter, setOpenFilter] = useState<string | null>(null);
+
+    const dispatch = useAppDispatch(); 
+    const {tracks} = useAppSelector((state) => state.tracksSlice) ;
 
     useEffect(() => {
     const fetchTracks = async () => {
         try {
             const data = await GetTracks();
             console.log("API Data:", data);
-            setTracks(data);
+            // setTracks(data);
+            dispatch(setTracks(data)); // Диспатчим данные треков в Redux
         }catch (error) {
             if(error instanceof Error) {
                 setError(error.message)
               }
           }
     };
-    fetchTracks(); // Вызываем функцию при монтировании компонента
-  }, []); // Пустой массив зависимостей означает, что useEffect выполнится один раз при монтировании
+    fetchTracks(); 
+  }, []); 
 
   const uniqueAuthors = Array.from(new Set(tracks.map((track) => track.author)));
   const uniqueGenres = Array.from(new Set(tracks.flatMap((track) => track.genre)));
@@ -38,14 +42,12 @@ export const MainContent = ({setCurrentTrack}: props) => {
   
   const toggleFilter = (filterType: string) => {
     if (openFilter === filterType) {
-        setOpenFilter(null); // Закрываем, если тот же фильтр
+        setOpenFilter(null); 
     }else {
-        setOpenFilter(filterType); // Открываем новый фильтр
+        setOpenFilter(filterType); 
     }
   };
 
-
-  // Если ошибка, выводим её на экран
   if (error) {
     return <div className={styles.errorMessage}>Ошибка: {error}</div>;
   }
@@ -81,37 +83,6 @@ export const MainContent = ({setCurrentTrack}: props) => {
             {openFilter === "genre" && <Filter filterList={uniqueGenres} />}
             </div>
           </div>
-          {/* Отображение фильтра исполнителей */}
-      {/* {openFilter === "author" && (
-        <div className={styles.filterList}>
-          {uniqueAuthors.map((author, index) => (
-            <div key={index} className={styles.filterItem}>
-              {author}
-            </div>
-          ))}
-        </div>
-      )} */}
-      {/* Отображение фильтра годов */}
-      {/* {openFilter === "releaseDate" && (
-        <div className={styles.filterList}>
-          {uniqueReleaseDate.map((release_date, index) => (
-            <div key={index} className={styles.filterItem}>
-              {release_date}
-            </div>
-          ))}
-        </div>
-      )} */}
-
-      {/* Отображение фильтра жанров */}
-      {/* {openFilter === "genre" && (
-        <div className={styles.filterList}>
-          {uniqueGenres.map((genre, index) => (
-            <div key={index} className={styles.filterItem}>
-              {genre}
-            </div>
-          ))}
-        </div>
-      )} */}
           <div className={`${styles.centerblockContent} ${styles.playlistContent}`}>
             <div className={`${styles.contentTitle} ${styles.playlistTitleCol}`}>
               <div className={`${styles.playlistTitleCol} ${styles.col01}`}>Трек</div>
@@ -123,7 +94,7 @@ export const MainContent = ({setCurrentTrack}: props) => {
                 </svg>
               </div>
             </div>
-            <TrackList tracks={tracks} setCurrentTrack={setCurrentTrack} />
+            <TrackList  />
           </div>
         </div>
 

@@ -1,16 +1,20 @@
 import { TrackType } from "@/types";
 import styles from "./Track.module.css"
-import { time } from "console";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { setTrackState } from "@/store/features/trackSlice";
 
 interface TrackProps {
     track: TrackType
-    setCurrentTrack: (track: TrackType) => void
 
 }
 
-export const Track: React.FC<TrackProps> = ({track, setCurrentTrack}) => {
+export const Track: React.FC<TrackProps> = ({track}) => {
+    const dispatch = useAppDispatch();
+    
+
     const onClickTrack = () => {
-        setCurrentTrack(track)
+        dispatch(setTrackState(track));
+        
     }
     return (
 

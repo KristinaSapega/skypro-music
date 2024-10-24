@@ -1,6 +1,6 @@
 .mainCenterblock {
     width: auto;
-    max-width: 1200px;
+    max-width: 1000px;
     -webkit-box-flex: 3;
     -ms-flex-positive: 3;
     flex-grow: 1;
