@@ -94,16 +94,25 @@
     border-radius: 60px;
     padding: 6px 20px;
     position: relative;
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
   }
 
   .filterButton:hover {
     color: #B672FF;
     border-color: #B672FF;
+    cursor: pointer;
   }
   
   .filterButton.active {
     color: #B672FF;
     border-color: #B672FF;
+    cursor: pointer;
   }
   
   .filterButton:not(:last-child) {
@@ -187,5 +196,60 @@
     width: 100%;
     display: block;
     margin-bottom: 12px;
+  }
+
+  .noTracks {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
+  }
+
+  .filterList {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background-color: #313131;
+    border-radius: 12px;
+    z-index: 10;
+    width: 221px;
+    height: 196px;
+    padding-top: 20px;
+  }
+  
+  .filterItem {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1.5;
+    
+  }
+  
+  .filterItem:hover {
+    color: #b672ff;
+    text-decoration: underline;
+  }
+  
+  .filterItem.active {
+    color: #b672ff;
+    text-decoration: underline;
+  }
+
+  .filterTab {
+    position: absolute;
+    top: -8px; /* Позиция таба над кнопкой */
+    right: -8px; /* Смещение таба влево от края кнопки */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 26px;
+    height: 25,5px;
+    background-color: #b672ff;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    
   }
   

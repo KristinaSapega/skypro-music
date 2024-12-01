@@ -3,7 +3,7 @@ import { Bar } from "@/components/Bar/Bar";
 import { NavBar } from "@/components/NavBar/NavBar";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
 import styles from "./layout.module.css";
-//import localFont from "next/font/local";
+
 
 export const metadata: Metadata = {
   title: "Create Next App",

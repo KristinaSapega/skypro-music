@@ -14,8 +14,6 @@ export default function TracksPage () {
         const fetchTracks = async () => {
             try {
                 const data = await GetTracks();
-                console.log("API Data:", data);
-                // setTracks(data);
                 dispatch(setTracks(data)); // Диспатчим данные треков в Redux
             }catch (error) {
                 if(error instanceof Error) {
@@ -26,9 +24,6 @@ export default function TracksPage () {
         fetchTracks(); 
       }, [dispatch]); 
 
-    //   if (error) {
-    //     return <div className={styles.errorMessage}>Ошибка: {error}</div>;
-    //   }
     return (
         <MainContent />
     )

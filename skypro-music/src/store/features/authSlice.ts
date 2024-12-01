@@ -73,8 +73,11 @@ const authSlice = createSlice({
 extraReducers: (builder) => {
   // Обрабатываем экшены, связанные с асинхронным thunk
   builder
-  .addCase(newUser.fulfilled, state => {
+  .addCase(newUser.fulfilled, (state, action: PayloadAction<AuthStateType>) => {
     state.authState = true; 
+    state.username = action.payload.username;
+    state.email = action.payload.email;
+    state.tokens = action.payload.tokens; 
   })
   .addCase(newUser.rejected, (state, action) => {
     state.errorMessage = action.error.message
@@ -95,6 +98,8 @@ extraReducers: (builder) => {
   .addCase(tokenUser.fulfilled, (state, action: PayloadAction<TokensType>) => {
     state.tokens.access = action.payload.access
     state.tokens.refresh = action.payload.refresh
+    localStorage.setItem("accessToken", action.payload.access);
+    localStorage.setItem("refreshToken", action.payload.refresh);
   })
   
 }

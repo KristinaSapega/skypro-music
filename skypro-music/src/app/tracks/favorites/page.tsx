@@ -78,7 +78,11 @@ export default function Favorites() {
         </div>
       </div>
       <div className={`${styles.centerblockContent} ${styles.playlistContent}`}>
-        <TrackList tracks={filteredFavoriteTracks} />
+      {filteredFavoriteTracks.length > 0 ? (
+          <TrackList tracks={filteredFavoriteTracks} />
+        ) : (
+          <div className={styles.noTracks}>Треки не добавлены</div>
+        )}
       </div>
     </div>
   );

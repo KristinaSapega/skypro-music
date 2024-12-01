@@ -20,21 +20,29 @@ export const useLikeTrack = (trackId: number) => {
             return;
         }
 
+        // Выбор действия: лайк или удаление лайка
         const action = isLiked ? DeleteTrackFavorite : AddTrackFavorite
 
         try {
-            await action({ _id: trackId, token: tokens.access })
+            const response = await action({ _id: trackId, token: tokens.access });
+
+            if (!response) {
+                throw new Error("Ошибка при выполнении запроса к API");
+            }
+
+            // Диспатчим обновление лайков в зависимости от результата
             if (isLiked) {
                 dispatch(dislikeTrack(trackId));
             } else {
                 dispatch(likeTrack(trackId));
             }
-            setError(null)
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+            setError(null); // Сбрасываем ошибки
         } catch (error) {
             setError("Ошибка при изменении лайка");
+            console.error("Ошибка при изменении лайка:", error);
         }
-    }
+    };
     return { isLiked, toggleLike };
 
 }

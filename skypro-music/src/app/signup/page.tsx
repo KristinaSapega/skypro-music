@@ -51,7 +51,8 @@ const Signup = () => {
                 .unwrap();
             router.push("/login")
         } catch (error) {
-            setError(`${(error as Error).message}`);
+            console.error(error)
+            setError(`Ошибка при входе в систему: ${(error as Error).message}.Попробуйте снова.`);
         }
     };
 

@@ -35,7 +35,6 @@
     background-color: #b672ff;
     border-radius: 50px;
     display: block;
-    /* animation: bubble_out 1s ease-in-out infinite both; */
   }
   .pulsing {
     animation: bubble_out 1s ease-in-out infinite both;
@@ -95,8 +94,8 @@
     width: 14px;
     height: 12px;
     margin-right: 17px;
-    fill: transparent;
-    stroke: #696969;
+    fill: currentColor;
+    stroke: #4e4e4e; 
   }
   
   .trackTimeText {
@@ -106,4 +105,17 @@
     text-align: right;
     color: #696969;
   }
-  
+  .trackTime {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.trackTime:hover {
+    color: #696969; 
+}
+
+.liked {
+  color: #B672FF;
+}

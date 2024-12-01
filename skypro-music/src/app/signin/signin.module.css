@@ -206,4 +206,8 @@
     text-align: center;
     color: red;
     margin-top: 16px;
+    text-align: center; 
+    max-width: 400px; /* Задает ширину для аккуратного отображения */
+    line-height: 1.5; /* Увеличивает расстояние между строками */
+    transform: translateY(50%); /* Центрирование по вертикали */
   }

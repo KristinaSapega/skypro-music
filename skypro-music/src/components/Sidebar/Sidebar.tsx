@@ -13,7 +13,6 @@ export const Sidebar = () => {
   const { tokens } = useAppSelector(state => state.auth);
 
 
-  //const { authState } = useAppSelector((state) => state.auth);
   const [userName, setUsername] = useState<string>("");
   useEffect(() => {
     const storeUsername = localStorage.getItem("username");
@@ -72,28 +71,6 @@ export const Sidebar = () => {
             </div>
           ))}
         </div>
-        {/* <div className={styles.sidebarItem}>
-                <a className={styles.sidebarLink} href={`/tracks/selections/${id}`}>
-                  <Image
-                    className={styles.sidebarImg}
-                    src="/img/playlist02.png"
-                    alt="day's playlist"
-                    width={250}
-                    height={170}
-                  />
-                </a>
-              </div> */}
-        {/* <div className={styles.sidebarItem}>
-                <a className={styles.sidebarLink} href={`/tracks/selections/${id}`}>
-                  <Image
-                    className={styles.sidebarImg}
-                    src="/img/playlist03.png"
-                    alt="day's playlist"
-                    width={250}
-                    height={170}
-                  />
-                </a>
-              </div> */}
       </div>
     </div>
   )

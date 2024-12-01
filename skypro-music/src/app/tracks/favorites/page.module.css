@@ -189,3 +189,9 @@
     margin-bottom: 12px;
   }
   
+  .noTracks {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
+  }

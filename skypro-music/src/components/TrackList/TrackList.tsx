@@ -8,7 +8,6 @@ interface TrackListProps {
 
 export const TrackList = ({tracks}:TrackListProps) => {
 
-  //const { tracks } = useAppSelector(state => state.tracksSlice);
   return (
     <div className={styles.contentPlaylist}>
       {tracks.map((track, index) => (

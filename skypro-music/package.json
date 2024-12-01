@@ -10,13 +10,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.3.0",
     "next": "14.2.15",
     "react": "^18",
-    "react-dom": "^18",
-    "react-redux": "^9.1.2"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^2.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.14",
@@ -24,11 +23,14 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/react-test-renderer": "^18.3.0",
+    "@types/redux-mock-store": "^1.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "react-redux": "^9.1.2",
     "react-test-renderer": "^18.3.1",
+    "redux-mock-store": "^1.5.5",
     "ts-node": "^10.9.2",
     "typescript": "^5"
   }

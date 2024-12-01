@@ -47,7 +47,7 @@ import { loginUser, tokenUser } from "@/store/features/authSlice";
       router.push("/");
     }catch (error) {
       console.error(error)
-      setError("Ошибка при входе в систему. Попробуйте снова.");
+      setError(`Ошибка при входе в систему: ${(error as Error).message}. Попробуйте снова.`);
     }
   };
 

@@ -1,34 +1,41 @@
 .filterList {
-    border-radius: 12px;
-    position:absolute;
-    left: 0;
-    top: 50px;
-    background-color:#313131;
-    padding: 34px;
-
+  border-radius: 12px;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  background-color: #313131;
+  padding: 34px;
 }
 .wrapper {
-    height: 305px;
-    overflow-y: auto;
-    padding-right: 24px;
+  height: 305px;
+  overflow-y: auto;
+  padding-right: 24px;
 
-    &::-webkit-scrollbar {
-        background-color: #4B4949;
-        width: 4px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: white ;
-    }
+  &::-webkit-scrollbar {
+    background-color: #4b4949;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: white;
+  }
 }
 
 .filterItem:hover {
-    color:#B672FF;
+  color: #b672ff;
+  text-decoration: underline;
 }
 
 .filterItem {
-    color: white;
-    font-size: 20px;
-    padding-bottom: 28px;
+  font-size: 20px;
+  padding-bottom: 28px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #fff;
+  line-height: 1.5;
+  transition: color 0.3s, background-color 0.3s;
 }
 
-
+.filterItem.selected {
+    color: #b672ff;
+    text-decoration: underline;
+  }

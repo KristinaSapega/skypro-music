@@ -3,18 +3,6 @@ import { TrackType } from "@/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-// const favoriteTracks = createAsyncThunk("track/favoriteTracks", async (accessToken: string) => {
-//     const favTracks = await 
-// })
-
-// export const likedFavTrack = createAsyncThunk("track/likeFavTrack", async ({_id, token}:LikeTypesProps) => {
-//     return await AddTrackFavorite({_id, token});
-// });
-
-// export const dislikedFavTrack = createAsyncThunk("track/dislikeFavTrack", async ({ _id, token }: LikeTypesProps) => {
-//     return await DeleteTrackFavorite({ _id, token });
-// });
-
 export const fetchFavoriteTracks = createAsyncThunk("track/fetchFavorites", async () => {
     const favoriteTracks = await GetFavoriteTracks();
     return favoriteTracks.data;
@@ -97,14 +85,8 @@ const playlistSlice = createSlice({
     },
 
     extraReducers: builder => {
-        // builder.addCase(likedFavTrack.fulfilled, (state, action: PayloadAction<number>) => {
-        //     state.likedTracks.push(action.payload)
-        // })
-        // builder.addCase(dislikedFavTrack.fulfilled, (state, action: PayloadAction<number>) => {
-        //     state.likedTracks = state.likedTracks.filter((_id) => _id !== action.payload);
-        // })
         builder.addCase(fetchFavoriteTracks.fulfilled, (state, action) => {
-            state.favoriteTracks = action.payload.map((track: TrackType) => track._id
+            state.favoriteTracks = action.payload?.map((track: TrackType) => track._id || []
 )});
     }
 });

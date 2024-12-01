@@ -1,12 +1,11 @@
 "use client"
-//import { TrackType } from "@/types"
 import styles from "./Bar.module.css"
 import { ChangeEvent, SyntheticEvent, useRef, useState } from "react"
 import ProgressBar from "../ProgressBar/ProgressBar"
 import { useAppDispatch, useAppSelector } from "@/store/store"
-//import { current } from "@reduxjs/toolkit"
 import { setIsPlaying, setIsShuffle, setNextTrack, setPrevTrack, setShuffle } from "@/store/features/trackSlice"
 import { useLikeTrack } from "@/hooks/useLikeTrack"
+import { formatTime } from "@/utils/timeUtils"
 
 
 export const Bar = () => {
@@ -40,11 +39,6 @@ export const Bar = () => {
 
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
-    const formatTime = (time: number) => {
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60).toString().padStart(2, '0');
-        return `${minutes}:${seconds}`;
-    };
 
     const onTogglePLay = () => {
         if (audioRef.current) {
@@ -63,7 +57,6 @@ export const Bar = () => {
     const onToggleLoop = () => {
         if (audioRef.current) {
             SetIsLoop(!isLoop);
-            console.log('Loop toggled:', !isLoop);
             audioRef.current.loop = !isLoop;
         }
     };
@@ -77,8 +70,8 @@ export const Bar = () => {
 
     const onChangeTime = (e: SyntheticEvent<HTMLAudioElement, Event>) => {
         setProgress({
-            currentTime: e.currentTarget.currentTime,
-            duration: e.currentTarget.duration
+            currentTime: e.currentTarget.currentTime || 0,
+            duration: e.currentTarget.duration || 0
         })
     };
 
@@ -114,8 +107,8 @@ export const Bar = () => {
             <div className={styles.bar}>
                 <div className={styles.barContent}>
                     <div className={styles.timeDisplay}>
-                        <span>{formatTime(progress.currentTime)}</span>
-                        <span> / {formatTime(progress.duration)}</span>
+                    <span>{progress.currentTime > 0 ? formatTime(progress.currentTime) : "00:00"}</span>
+                    <span> / {progress.duration > 0 ? formatTime(progress.duration) : "00:00"}</span>
                     </div>
                     <ProgressBar
                         max={progress.duration}
@@ -123,7 +116,6 @@ export const Bar = () => {
                         step={0.1}
                         onChange={onSeek}
                     />
-                    {/* <div className={styles.barPlayerProgress}></div> */}
                     <div className={styles.barPlayerBlock}>
 
                         <div className={styles.barPlayer}>
@@ -133,7 +125,8 @@ export const Bar = () => {
                                         <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                                     </svg>
                                 </div>
-                                <div onClick={onTogglePLay} className={`${styles.playerBtnPlay} ${styles.btn}`}>
+                                <div role="button" aria-label="Play"
+                                onClick={onTogglePLay} className={`${styles.playerBtnPlay} ${styles.btn}`}>
                                     {isPlay ? (
                                         <svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <rect x="0" y="0" width="5" height="20" fill="#D9D9D9" />
@@ -156,7 +149,8 @@ export const Bar = () => {
                                         <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                                     </svg>
                                 </div>
-                                <div onClick={onToggleShuffle}
+                                <div role="button" aria-label="Shuffle"
+                                onClick={onToggleShuffle}
                                     className={`${styles.playerBtnShuffle} ${styles.btnIcon} ${isShuffle ? styles.playerBtnShuffleActive : ''}`}>
                                     <svg className={styles.playerBtnShuffleSvg}>
                                         <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
@@ -198,7 +192,6 @@ export const Bar = () => {
                                         </svg>
                                     </div>
                                     <div className={`${styles.barVolumeBlock} ${styles.volume}`}>
-                                        {/* <svg className={styles.trackPlayDislikeSvg}></svg> */}
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +207,8 @@ export const Bar = () => {
                                     <input onChange={onChangeVolume}
                                         className={`${styles.volumeProgressLine} ${styles.btn}`}
                                         type="range"
-                                        name="range" />
+                                        name="range" 
+                                        aria-label="Volume"/>
                                 </div>
                             </div>
                         </div>
